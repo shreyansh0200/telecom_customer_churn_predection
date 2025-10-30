@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ML Predict - Input</title>
-  <link rel="stylesheet" href="/static/css/ml1.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
 </head>
 <body>
@@ -24,10 +24,10 @@
 
     <form action="/result" method="post">
       <label for="churn">Churn Category (numeric)</label>
-      <input id="churn" name="Churn Category" type="number" step="any" inputmode="decimal" value="{{ churn_category|default('') }}" required>
+  <input id="churn" name="churn_category" type="number" step="any" inputmode="decimal" value="{{ churn_category|default('') }}" required>
 
       <label for="tenure">Tenure in Months (numeric)</label>
-      <input id="tenure" name="Tenure in Months" type="number" step="any" inputmode="decimal" value="{{ tenure_months|default('') }}" required>
+  <input id="tenure" name="tenure_months" type="number" step="any" inputmode="decimal" value="{{ tenure_months|default('') }}" required>
 
       <button type="submit"> Predict</button>
     </form>

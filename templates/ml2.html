@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prediction Result</title>
-  <link rel="stylesheet" href="/static/css/ml2.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
 </head>
 <body>
   <div class="container">
-    <h1 Prediction Result</h1>
+  <h1>Prediction Result</h1>
 
     <div class="result">
       <h2>{{ result }}</h2>

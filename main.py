@@ -5,6 +5,7 @@ predict function and adds input validation so the app can render
 `ml2.html` with a prediction.
 """
 
+import os
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -60,8 +61,9 @@ def home():
 @app.route('/result', methods=['POST'])
 def result():
     # Read form values safely and convert to floats with fallbacks
-    raw_cc = request.form.get('Churn Category', '')
-    raw_tenure = request.form.get('Tenure in Months', '')
+    # Use normalized form field names (no spaces) for reliability
+    raw_cc = request.form.get('churn_category', '')
+    raw_tenure = request.form.get('tenure_months', '')
 
     try:
         churn_category = float(raw_cc)
@@ -80,5 +82,8 @@ def result():
 
 
 if __name__ == '__main__':
-    # Only run when executed directly; easier for import and testing
-    app.run(debug=True)
+    # Only run when executed directly. For deployment use a production WSGI
+    # server (waitress/gunicorn) but provide a sensible default here that
+    # honors the PORT environment variable used by many hosting platforms.
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
